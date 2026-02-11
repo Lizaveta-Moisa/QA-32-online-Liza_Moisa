@@ -15,7 +15,6 @@ public class CartPage extends BasePage {
     private static final By CART_ITEMS = By.className("cart_item");
     private static final By CHECKOUT_BUTTON = By.id("checkout");
     private static final By CONTINUE_SHOPPING_BUTTON = By.className("continue-shopping");
-    private static final By REMOVE_BUTTON = By.cssSelector(".cart_button");
 
     public CartPage(WebDriver driver,
                     WebDriverWait wait) {

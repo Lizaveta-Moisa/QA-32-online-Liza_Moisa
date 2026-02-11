@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
     private static final By USERNAME_FIELD = By.id("user-name");
     private static final By PASSWORD_FIELD = By.id("password");
     private static final By LOGIN_BUTTON = By.id("login-button");
+    private static final By ERROR_LOCATOR = By.cssSelector("[data-test='error']");
 
     public LoginPage(WebDriver driver,
                      WebDriverWait wait) {
@@ -39,6 +40,10 @@ public class LoginPage extends BasePage {
     public LoginPage typePassword(String password) {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
+    }
+
+    public String getErrorMessage(){
+        return driver.findElement(ERROR_LOCATOR).getText();
     }
 
     public void clickLoginButton() {
