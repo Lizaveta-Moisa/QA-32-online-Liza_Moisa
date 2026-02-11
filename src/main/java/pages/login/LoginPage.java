@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public LoginPage waitForLoad() {
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(LOGIN_BUTTON)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         return this;
     }
 

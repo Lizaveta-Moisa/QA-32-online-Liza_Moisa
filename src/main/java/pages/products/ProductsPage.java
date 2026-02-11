@@ -8,7 +8,7 @@ import pages.BasePage;
 
 public class ProductsPage extends BasePage {
 
-    public static final String PAGE_TITLE = "Swag Labs";
+    public static final String PAGE_TITLE = "Products";
 
     private static final By PAGE_HEADER = By.className("title");
     private static final By INVENTORY_ITEMS = By.cssSelector(".inventory_item");

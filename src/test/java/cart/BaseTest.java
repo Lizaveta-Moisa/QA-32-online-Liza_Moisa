@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class BaseTest {
     private static final Integer WAIT_TIME = 10;
 
@@ -22,6 +24,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
     }
 
     @AfterEach
