@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
 
 public class BaseTest {
     private static final Integer WAIT_TIME = 10;
@@ -20,7 +22,17 @@ public class BaseTest {
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-save-password-bubble");
+        options.setExperimentalOption(
+                "prefs",
+                Map.of(
+                        "credentials_enable_service", false,
+                        "profile.password_manager_enabled", false,
+                        "profile.password_manager_leak_detection", false
+                )
+        );
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com");

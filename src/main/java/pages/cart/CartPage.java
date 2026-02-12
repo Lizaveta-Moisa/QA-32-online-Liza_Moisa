@@ -14,7 +14,7 @@ public class CartPage extends BasePage {
 
     private static final By CART_ITEMS = By.className("cart_item");
     private static final By CHECKOUT_BUTTON = By.id("checkout");
-    private static final By CONTINUE_SHOPPING_BUTTON = By.className("continue-shopping");
+    private static final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
 
     public CartPage(WebDriver driver,
                     WebDriverWait wait) {
@@ -22,7 +22,7 @@ public class CartPage extends BasePage {
     }
 
     @Override
-    public BasePage waitForLoad() {
+    public CartPage waitForLoad() {
         wait.until(ExpectedConditions.elementToBeClickable(CHECKOUT_BUTTON));
         return this;
     }
@@ -42,10 +42,5 @@ public class CartPage extends BasePage {
 
     public void clickContinueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
-    }
-
-    public void removeItem(String itemName) {
-        String xpath = "//div[@class='cart_item']//div[text()='" + itemName + "']/ancestor::div[@class='cart_item']//button[contains(text(),'Remove')]";
-        driver.findElement(By.xpath(xpath)).click();
     }
 }

@@ -2,6 +2,7 @@ package pages.checkout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
@@ -53,7 +54,8 @@ public class CheckoutPage extends BasePage {
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
-    public void clickCancel() {
-        driver.findElement(CANCEL_BUTTON).click();
+    public String getErrorMessage() {
+        WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test='error']")));
+        return errorElement.getText();
     }
 }
