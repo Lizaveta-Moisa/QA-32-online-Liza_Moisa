@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FramesPage extends BasePage{
-    @FindBy(id = "frame1")
+    @FindBy(xpath = "a[href='/iframe']")
     private WebElement frame1;
 
-    @FindBy(id = "frame2")
+    @FindBy(id = "a[href='/nested_frames']")
     private WebElement frame2;
 
     public FramesPage(WebDriver driver, WebDriverWait wait) {
@@ -20,8 +21,9 @@ public class FramesPage extends BasePage{
     }
 
     @Override
-    public BasePage waitForLoad() {
-        wait.until(driver -> frame1.isDisplayed() && frame2.isDisplayed());
+    public FramesPage waitForLoad() {
+        wait.until(ExpectedConditions.visibilityOf(frame1));
+        wait.until(ExpectedConditions.visibilityOf(frame2));
         return this;
     }
     public void switchToFrame1() {

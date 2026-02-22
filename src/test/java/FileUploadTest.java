@@ -1,12 +1,13 @@
 import org.testng.annotations.Test;
 import page.upload.FileUploadPage;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.testng.AssertJUnit.fail;
 
-public class FileUploadTest extends BaseTest{
+public class FileUploadTest extends BaseTest {
     private final String baseUrl = "https://the-internet.herokuapp.com/upload";
 
     @Test
@@ -15,9 +16,9 @@ public class FileUploadTest extends BaseTest{
         FileUploadPage page = new FileUploadPage(driver, wait);
         page.waitForLoad();
 
-        String fileName = "testfile.txt";
-
-        String filePath = Paths.get("src/QA-32-online-Liza_Moisa", fileName).toAbsolutePath().toString();
+        final String fileName = "testfile.txt";
+        Path projectRoot = Paths.get("").toAbsolutePath();
+        String filePath = projectRoot.resolve("src/main/resources/files/%s".formatted(fileName)).toString();
 
         try {
             page.uploadFile(filePath);
@@ -32,8 +33,9 @@ public class FileUploadTest extends BaseTest{
         FileUploadPage page = new FileUploadPage(driver, wait);
         page.waitForLoad();
 
-        String fileName = "testfile.txt";
-        String filePath = Paths.get("src/QA-32-online-Liza_Moisa", fileName).toAbsolutePath().toString();
+        final String fileName = "testfile.txt";
+        Path projectRoot = Paths.get("").toAbsolutePath();
+        String filePath = projectRoot.resolve("src/main/resources/files/%s".formatted(fileName)).toString();
 
         page.uploadFile(filePath);
 
