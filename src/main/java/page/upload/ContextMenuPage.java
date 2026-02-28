@@ -24,7 +24,6 @@ public class ContextMenuPage extends BasePage{
         return this;
     }
 
-
     public void openContextMenu() {
         new Actions(driver).contextClick(contextMenuArea).perform();
     }
