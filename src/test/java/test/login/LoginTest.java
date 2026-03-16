@@ -1,6 +1,6 @@
 package test.login;
 
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import pages.login.LoginPage;
 import pages.products.ProductsPage;

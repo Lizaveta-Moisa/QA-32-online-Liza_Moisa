@@ -1,6 +1,6 @@
 package test.cart;
 
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
