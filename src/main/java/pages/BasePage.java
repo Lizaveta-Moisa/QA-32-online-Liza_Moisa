@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 public class BasePage {
     protected final WebDriver driver;
     protected final WebDriverWait wait;
+    protected static final String BASE_URL = "https://www.saucedemo.com/";
 
     protected BasePage(WebDriver driver,
                        WebDriverWait wait) {

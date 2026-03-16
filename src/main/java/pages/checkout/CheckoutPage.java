@@ -10,7 +10,7 @@ import pages.BasePage;
 public class CheckoutPage extends BasePage {
     public static final String TITLE_TEXT = "Checkout: Your Information";
 
-    private static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
+    private static final String ENDPOINT = "checkout-step-one.html";
 
     private static final By FIRST_NAME_FIELD = By.id("first-name");
     private static final By LAST_NAME_FIELD = By.id("last-name");
@@ -30,7 +30,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage open() {
-        driver.get(URL);
+        driver.get(BASE_URL + ENDPOINT);
         return this;
     }
 

@@ -9,11 +9,12 @@ import pages.BasePage;
 public class CartPage extends BasePage {
     public static final String TITLE_TEXT = "Your Cart";
 
-    private static final String URL = "https://www.saucedemo.com/cart.html";
+    private static final String ENDPOINT = "cart.html";
 
     private static final By CART_ITEMS = By.className("cart_item");
     private static final By CHECKOUT_BUTTON = By.id("checkout");
     private static final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
+
 
     public CartPage(WebDriver driver,
                     WebDriverWait wait) {
@@ -27,7 +28,7 @@ public class CartPage extends BasePage {
     }
 
     public CartPage open() {
-        driver.get(URL);
+        driver.get(BASE_URL + ENDPOINT);
         return this;
     }
 

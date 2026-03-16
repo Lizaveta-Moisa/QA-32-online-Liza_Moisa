@@ -1,5 +1,6 @@
 package pages.products;
 
+import org.openqa.selenium.NoSuchElementException;
 import pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class ProductsPage extends BasePage {
     private static final By INVENTORY_ITEMS = By.cssSelector(".inventory_item");
     private static final By BASKET_ICON = By.className("shopping_cart_link");
     private static final By PRODUCT_NAME = By.cssSelector(".inventory_item_name");
+    private static final String ADD_TO_CART_BUTTON = "add-to-cart-%s";
 
     public ProductsPage(WebDriver driver,
                         WebDriverWait wait) {
@@ -26,18 +28,15 @@ public class ProductsPage extends BasePage {
     }
 
     public boolean isLoaded() {
-        // Проверяет, что заголовок страницы отображается и совпадает
         String headerText = driver.findElement(PAGE_HEADER).getText();
         return PAGE_TITLE.equals(headerText);
     }
 
     public int getItemsCount() {
-        // Возвращает количество товаров на странице
         return driver.findElements(INVENTORY_ITEMS).size();
     }
 
     public String getProductNameByIndex(int index) {
-        // Получает имя товара по порядковому номеру (начиная с 0)
         return driver.findElements(PRODUCT_NAME).get(index).getText();
     }
 
@@ -46,12 +45,16 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
+    public ProductsPage addProductToCart(String productId) {
+        driver.findElement(By.id(ADD_TO_CART_BUTTON.formatted(productId))).click();
+        return this;
+    }
+
     public boolean isProductInCart(String productName) {
-        // Проверка наличия товара в корзине по названию
         try {
-            driver.findElement(By.xpath("//div[@class='cart_item']//div[text()='" + productName + "']"));
+            driver.findElement(By.xpath("//div[@class='cart_item']//div[text()='%s']".formatted(productName)));
             return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             return false;
         }
     }

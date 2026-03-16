@@ -9,19 +9,19 @@ import test.BaseTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CheckoutTest extends BaseTest {
-    private static final String userName = "standard_user";
-    private static final String passWord = "secret_sauce";
+    private static final String USER_NAME = "standard_user";
+    private static final String PASS_WORD = "secret_sauce";
 
-    private static final String firstName = "Ivan";
-    private static final String lastName = "Ivanov";
-    private static final String postalCode = "12345";
+    private static final String FIRST_NAME = "Ivan";
+    private static final String LAST_NAME = "Ivanov";
+    private static final String POSTAL_CODE = "12345";
 
     private void loginAndOpenCheckout() {
         new LoginPage(driver, wait)
                 .open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
         new CartPage(driver, wait)
@@ -46,8 +46,8 @@ public class CheckoutTest extends BaseTest {
         loginAndOpenCheckout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver, wait)
-                .typeLastName(lastName)
-                .typePostalCode(postalCode);
+                .typeLastName(LAST_NAME)
+                .typePostalCode(POSTAL_CODE);
 
         checkoutPage.clickContinue();
 
@@ -62,8 +62,8 @@ public class CheckoutTest extends BaseTest {
         loginAndOpenCheckout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver, wait)
-                .typeFirstName(firstName)
-                .typePostalCode(postalCode);
+                .typeFirstName(FIRST_NAME)
+                .typePostalCode(POSTAL_CODE);
 
         checkoutPage.clickContinue();
 
@@ -78,8 +78,8 @@ public class CheckoutTest extends BaseTest {
         loginAndOpenCheckout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver, wait)
-                .typeFirstName(firstName)
-                .typeLastName(lastName);
+                .typeFirstName(FIRST_NAME)
+                .typeLastName(LAST_NAME);
         checkoutPage.clickContinue();
 
         String error = checkoutPage.getErrorMessage();
@@ -93,9 +93,9 @@ public class CheckoutTest extends BaseTest {
         loginAndOpenCheckout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver, wait)
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typePostalCode(postalCode);
+                .typeFirstName(FIRST_NAME)
+                .typeLastName(LAST_NAME)
+                .typePostalCode(POSTAL_CODE);
 
         checkoutPage.clickContinue();
 

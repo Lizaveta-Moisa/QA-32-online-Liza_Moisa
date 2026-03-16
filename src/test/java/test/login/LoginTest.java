@@ -10,7 +10,6 @@ import static pages.login.LoginPage.TITLE_TEXT;
 
 public class LoginTest extends test.BaseTest {
 
-    // Проверка успешного входа при правильных данных
     @Test
     public void LoginWithValidCredentials() {
 
@@ -31,7 +30,6 @@ public class LoginTest extends test.BaseTest {
                 .isTrue();
     }
 
-    // Проверка появления ошибки при входе без указания имени пользователя
     @Test
     public void testLoginWithoutUsername() {
 
@@ -51,11 +49,10 @@ public class LoginTest extends test.BaseTest {
                 .isEqualTo("Epic sadface: Username is required");
     }
 
-    // Проверка появления ошибки при входе без пароля
     @Test
     public void testLoginWithoutPassword() {
 
-        LoginPage loginPage = new LoginPage(driver,wait);
+        LoginPage loginPage = new LoginPage(driver, wait);
 
         final String userName = "standard_user";
 
@@ -71,7 +68,6 @@ public class LoginTest extends test.BaseTest {
                 .isEqualTo("Epic sadface: Password is required");
     }
 
-    // Проверка появления ошибки при неверных учетных данных
     @Test
     public void testLoginWithInvalidCredentials() {
 
@@ -93,11 +89,10 @@ public class LoginTest extends test.BaseTest {
                 .isEqualTo("Epic sadface: Username and password do not match any user in this service");
     }
 
-    // Проверка соответствия заголовка страницы
     @Test
     public void testPageTitle() {
 
-        LoginPage  loginPage = new LoginPage(driver, wait);
+        LoginPage loginPage = new LoginPage(driver, wait);
 
         loginPage.open()
                 .waitForLoad();

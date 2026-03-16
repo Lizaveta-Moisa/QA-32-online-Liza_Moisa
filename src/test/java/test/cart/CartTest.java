@@ -6,13 +6,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.cart.CartPage;
 import pages.login.LoginPage;
+import pages.products.ProductsPage;
 import test.BaseTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CartTest extends BaseTest {
-    private static final String userName = "standard_user";
-    private static final String passWord = "secret_sauce";
+    private static final String USER_NAME = "standard_user";
+    private static final String PASS_WORD = "secret_sauce";
 
     @Test
     public void testOpenCartPageAndTitle() {
@@ -21,8 +22,8 @@ public class CartTest extends BaseTest {
 
         loginPage.open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
         CartPage cartPage = new CartPage(driver, wait);
@@ -41,8 +42,8 @@ public class CartTest extends BaseTest {
 
         loginPage.open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
         CartPage cartPage = new CartPage(driver, wait);
@@ -58,8 +59,8 @@ public class CartTest extends BaseTest {
         new LoginPage(driver, wait)
                 .open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
         ChromeOptions options = new ChromeOptions();
@@ -81,8 +82,8 @@ public class CartTest extends BaseTest {
         new LoginPage(driver, wait)
                 .open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
         driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
@@ -105,11 +106,14 @@ public class CartTest extends BaseTest {
         new LoginPage(driver, wait)
                 .open()
                 .waitForLoad()
-                .typeUserName(userName)
-                .typePassword(passWord)
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
-        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        new ProductsPage(driver, wait)
+                .waitForLoad()
+                .addProductToCart("sauce-labs-backpack")
+                .clickBasketIcon();
 
         CartPage cartPage = new CartPage(driver, wait);
         cartPage.open()
