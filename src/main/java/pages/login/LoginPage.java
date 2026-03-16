@@ -1,5 +1,6 @@
 package pages.login;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,6 +28,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @Step("Открытие страницы логина")
     public LoginPage open() {
         driver.get(URL);
         return this;
