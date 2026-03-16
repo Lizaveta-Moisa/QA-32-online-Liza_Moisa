@@ -34,6 +34,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @Step("ПУПУПУ")
     public LoginPage typeUserName(String username) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         return this;
