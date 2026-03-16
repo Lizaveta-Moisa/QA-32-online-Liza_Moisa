@@ -22,6 +22,7 @@ public class LoginPage extends BasePage {
         super(driver, wait);
     }
 
+    @Step("Ожидание загрузки страницы авторизации")
     @Override
     public LoginPage waitForLoad() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
@@ -34,21 +35,24 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("ПУПУПУ")
+    @Step("Ввести имя пользователя: {userName}")
     public LoginPage typeUserName(String username) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         return this;
     }
 
+    @Step("Ввести пароль")
     public LoginPage typePassword(String password) {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
     }
 
+    @Step("Получение сообщения об ошибке")
     public String getErrorMessage(){
         return driver.findElement(ERROR_LOCATOR).getText();
     }
 
+    @Step("Нажать на кнопку Login")
     public void clickLoginButton() {
         driver.findElement(LOGIN_BUTTON).click();
     }

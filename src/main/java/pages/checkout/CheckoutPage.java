@@ -1,5 +1,6 @@
 package pages.checkout;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,36 +24,43 @@ public class CheckoutPage extends BasePage {
         super(driver, wait);
     }
 
+    @Step("Ожидание загрузки страницы оформлениязаказа")
     @Override
     public BasePage waitForLoad() {
         wait.until(ExpectedConditions.elementToBeClickable(CONTINUE_BUTTON));
         return this;
     }
 
+    @Step("Открытие страницы оформление заказа (часть 1)")
     public CheckoutPage open() {
         driver.get(BASE_URL + ENDPOINT);
         return this;
     }
 
+    @Step("Ввести First Name")
     public CheckoutPage typeFirstName(String firstName) {
         driver.findElement(FIRST_NAME_FIELD).sendKeys(firstName);
         return this;
     }
 
+    @Step("Ввести Last Name")
     public CheckoutPage typeLastName(String lastName) {
         driver.findElement(LAST_NAME_FIELD).sendKeys(lastName);
         return this;
     }
 
+    @Step("Ввести Postal Code")
     public CheckoutPage typePostalCode(String postalCode) {
         driver.findElement(POSTAL_CODE_FIELD).sendKeys(postalCode);
         return this;
     }
 
+    @Step("Нажать на кнопку Continue")
     public void clickContinue() {
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
+    @Step("получение сообщения об ошибке")
     public String getErrorMessage() {
         WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test='error']")));
         return errorElement.getText();

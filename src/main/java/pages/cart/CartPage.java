@@ -1,5 +1,6 @@
 package pages.cart;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,25 +22,30 @@ public class CartPage extends BasePage {
         super(driver, wait);
     }
 
+    @Step("Ожидание загрузки страницы")
     @Override
     public CartPage waitForLoad() {
         wait.until(ExpectedConditions.elementToBeClickable(CHECKOUT_BUTTON));
         return this;
     }
 
+    @Step("Открыть страницу корзины")
     public CartPage open() {
         driver.get(BASE_URL + ENDPOINT);
         return this;
     }
 
+    @Step("Получить количество товаров в корзине")
     public int getItemsCount() {
         return driver.findElements(CART_ITEMS).size();
     }
 
+    @Step("Нажать на кнопку Checkout")
     public void clickCheckout() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
+    @Step("Нажать Continue Shopping")
     public void clickContinueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }

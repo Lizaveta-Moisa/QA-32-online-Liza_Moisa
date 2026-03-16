@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeoutException;
 
 public class BasePage {
     protected final WebDriver driver;
