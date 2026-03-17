@@ -1,45 +1,39 @@
 package tests;
 
 import factory.PageFactoryManager;
-import driver.DriverSingleton;
+import io.qameta.allure.Description;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
-import io.qameta.allure.Description;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import utils.ScreenshotUtil;
 
-public class LoginTest {
+public class LoginTest extends BaseTest{
 
-    @Attachment(value = "Скриншот страницы", type = "image/png")
-    public byte[] takeScreenshot() {
-        return ((TakesScreenshot) DriverSingleton.getDriver())
-                .getScreenshotAs(OutputType.BYTES);
-    }
+    private static final String USER_NAME = "standard_user";
+    private static final String PASS_WORD = "secret_sauce";
 
     @Test
     @Description("Login через обычные обёрки")
     public void loginWithSoftAssertions() {
         SoftAssertions soft = new SoftAssertions();
 
-        PageFactoryManager pageManager = new PageFactoryManager(DriverSingleton.getDriver());
+        PageFactoryManager pageManager = new PageFactoryManager(driver);
+
         LoginPage loginPage = pageManager.getLoginPage();
         ProductsPage productsPage = pageManager.getProductsPage();
 
         loginPage.open()
-                .typeUserName("standard_user")
-                .typePassword("secret_sauce")
+                .typeUserName(USER_NAME)
+                .typePassword(PASS_WORD)
                 .clickLoginButton();
 
-        takeScreenshot();
+        ScreenshotUtil.takeScreenshot(driver);
 
         soft.assertThat(productsPage.isLoaded())
                 .as("Пользователь не авторизовался")
                 .isTrue();
 
         soft.assertAll();
-        DriverSingleton.closeDriver();
     }
 }
