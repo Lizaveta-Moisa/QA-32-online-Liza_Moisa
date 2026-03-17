@@ -36,7 +36,8 @@ public class LoginPage  extends BasePage{
     }
 
     @Step("Нажать на кнопку Login")
-    public void clickLoginButton() {
+    public ProductsPage clickLoginButton() {
         new Button(driver.findElement(LOGIN_BUTTON)).click();
+        return new ProductsPage(driver);
     }
 }

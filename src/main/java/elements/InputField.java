@@ -1,10 +1,10 @@
 package elements;
 
-import org.openqa.selenium.WebElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 
 public class InputField {
-    private WebElement element;
+    private final WebElement element;
 
     public InputField(WebElement element) {
         this.element = element;
@@ -14,9 +14,5 @@ public class InputField {
     public void type(String text) {
         element.clear();
         element.sendKeys(text);
-    }
-
-    public String getText() {
-        return element.getAttribute("value");
     }
 }

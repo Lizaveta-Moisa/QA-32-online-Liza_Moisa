@@ -4,7 +4,6 @@ import factory.PageFactoryManager;
 import io.qameta.allure.Description;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import pages.LoginPage;
 import pages.ProductsPage;
 import utils.ScreenshotUtil;
 
@@ -14,18 +13,16 @@ public class LoginTest extends BaseTest{
     private static final String PASS_WORD = "secret_sauce";
 
     @Test
-    @Description("Login через обычные обёрки")
+    @Description("Успешный Login с использованием обёртки")
     public void loginWithSoftAssertions() {
         SoftAssertions soft = new SoftAssertions();
 
         PageFactoryManager pageManager = new PageFactoryManager(driver);
 
-        LoginPage loginPage = pageManager.getLoginPage();
-        ProductsPage productsPage = pageManager.getProductsPage();
-
-        loginPage.open()
-                .typeUserName(USER_NAME)
-                .typePassword(PASS_WORD)
+        ProductsPage productsPage = pageManager.getLoginPage()
+                .open()
+                .typeUserName("standard_user")
+                .typePassword("secret_sauce")
                 .clickLoginButton();
 
         ScreenshotUtil.takeScreenshot(driver);

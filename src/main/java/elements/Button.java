@@ -1,10 +1,10 @@
 package elements;
 
-import org.openqa.selenium.WebElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 
 public class Button {
-    private WebElement element;
+    private final WebElement element;
 
     public Button(WebElement element) {
         this.element = element;
@@ -13,9 +13,5 @@ public class Button {
     @Step("Клик по кнопке")
     public void click() {
         element.click();
-    }
-
-    public boolean isDisplayed() {
-        return element.isDisplayed();
     }
 }
