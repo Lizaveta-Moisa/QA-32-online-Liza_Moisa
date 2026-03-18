@@ -2,6 +2,8 @@ package test.login;
 
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.login.LoginPage;
 import pages.products.ProductsPage;
 import utils.ScreenshotUtil;
@@ -14,9 +16,12 @@ public class LoginTest extends test.BaseTest {
     private static final String USER_NAME = "standard_user";
     private static final String PASS_WORD = "secret_sauce";
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
+
     @Description("Проверка авторизации с валидными данными")
     @Test
     public void loginWithValidCredentials() {
+        logger.info("=== START TEST: loginWithValidCredentials ===");
 
         LoginPage loginPage = new LoginPage(driver, wait);
         ProductsPage productsPage = new ProductsPage(driver, wait);
@@ -27,17 +32,20 @@ public class LoginTest extends test.BaseTest {
                 .typePassword(PASS_WORD)
                 .clickLoginButton();
 
+        logger.info("Делаем скриншот");
         ScreenshotUtil.takeScreenshot(driver);
 
+        logger.info("Проверка загрузки страницы продуктов");
         assertThat(productsPage.isLoaded())
                 .as("Пользователь не авторизовался и не попал на страницу товаров")
                 .isTrue();
+        logger.info("=== END TEST: SUCCESS ===");
     }
 
     @Description("Проверка сообщения об ошибке при отсутствии имени пользователя")
     @Test
     public void loginWithoutUsername() {
-
+        logger.info("=== START TEST: loginWithoutUsername ===");
         LoginPage loginPage = new LoginPage(driver, wait);
 
         loginPage.open()
@@ -52,6 +60,7 @@ public class LoginTest extends test.BaseTest {
         assertThat(errorMessage)
                 .as("Ошибка отсутствует или некорректная")
                 .isEqualTo("Epic sadface: Username is required");
+        logger.info("=== END TEST: SUCCESS ===");
     }
 
     @Description("Проверка сообщения об ошибке при отсутствии пароля")
