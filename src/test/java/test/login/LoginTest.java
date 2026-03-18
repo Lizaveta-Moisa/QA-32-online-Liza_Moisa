@@ -26,6 +26,7 @@ public class LoginTest extends test.BaseTest {
         LoginPage loginPage = new LoginPage(driver, wait);
         ProductsPage productsPage = new ProductsPage(driver, wait);
 
+        logger.info("Авторизуем на странице с валидными логин и паролем");
         loginPage.open()
                 .waitForLoad()
                 .typeUserName(USER_NAME)
@@ -53,6 +54,7 @@ public class LoginTest extends test.BaseTest {
                 .typePassword(PASS_WORD)
                 .clickLoginButton();
 
+        logger.info("Делаем скриншот");
         ScreenshotUtil.takeScreenshot(driver);
 
         String errorMessage = loginPage.getErrorMessage();
