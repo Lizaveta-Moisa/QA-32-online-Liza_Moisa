@@ -1,0 +1,57 @@
+version: 2.1
+
+jobs:
+  checkstyle:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+
+      - run:
+          name: Run Checkstyle
+          command: mvn checkstyle:check
+
+  build:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+
+      - run:
+          name: Build project
+          command: mvn clean package -DskipTests
+
+  test:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+
+      - run:
+          name: Run tests
+          command: mvn test
+
+      - run:
+          name: Generate Allure report
+          command: mvn allure:report || true
+
+      - store_artifacts:
+          path: target/allure-results
+          destination: allure-results
+
+      - store_artifacts:
+          path: target/site/allure-maven-plugin
+          destination: allure-report
+
+
+  workflows:
+    version: 2
+    ci_pipeline:
+      jobs:
+        - checkstyle
+        - build:
+            requires:
+              - checkstyle
+        - test:
+            requires:
+              - build
