@@ -7,7 +7,9 @@ import pages.SignupPage;
 
 public class SignupSteps {
     private final WebDriver driver;
+
     private HomePage homePage;
+
     private SignupPage signupPage;
 
     public SignupSteps(WebDriver driver) {

@@ -5,15 +5,18 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SignupPage extends BasePage{
+public class SignupPage extends BasePage {
 
     public SignupPage(WebDriver driver) {
         super(driver);
     }
 
     private final By nameInput = By.xpath("//input[@data-qa='signup-name']");
+
     private final By emailInput = By.xpath("//input[@data-qa='signup-email']");
+
     private final By signupButton = By.xpath("//button[@data-qa='signup-button']");
+
     private final By errorMessage = By.xpath("//p[contains(text(),'Email Address already exist')]");
 
     @Step("Вводим имя: {name}")

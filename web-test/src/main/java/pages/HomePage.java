@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     }
 
     private final By loginButton = By.xpath("//a[@href='/login']");
-    private final By signupButton = By.xpath("//a[@href='/signup']");
+
     private final By logoutButton = By.xpath("//a[normalize-space()='Logout']");
 
     @Step("Нажимаем кнопку Login")

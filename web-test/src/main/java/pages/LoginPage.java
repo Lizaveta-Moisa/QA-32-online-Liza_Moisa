@@ -12,8 +12,11 @@ public class LoginPage extends BasePage {
     }
 
     private final By emailInput = By.xpath("//input[@data-qa='login-email']");
+
     private final By passwordInput = By.xpath("//input[@data-qa='login-password']");
+
     private final By loginButton = By.xpath("//button[@data-qa='login-button']");
+
     private final By errorMessage = By.xpath("//p[contains(text(),'incorrect')]");
 
     @Step("Вводим email: {email}")

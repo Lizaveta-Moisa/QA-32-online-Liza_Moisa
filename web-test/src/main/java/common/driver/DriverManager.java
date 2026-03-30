@@ -18,7 +18,9 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-        if (driver == null) initDriver();
+        if (driver == null) {
+            initDriver();
+        }
         return driver;
     }
 

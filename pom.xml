@@ -10,6 +10,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>web-test</module>
+        <module>common</module>
+        <module>database</module>
+        <module>api</module>
+        <module>api-test</module>
     </modules>
 
     <properties>
@@ -29,8 +33,13 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.3.1</version>
+                <configuration>
+                    <configLocation>.configuration/checkstyle/checkstyle.xml</configLocation>
+                    <failOnViolation>true</failOnViolation>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>

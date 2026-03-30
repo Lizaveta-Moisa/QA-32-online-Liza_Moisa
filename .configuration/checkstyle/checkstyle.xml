@@ -4,12 +4,10 @@
         ".configuration/dtd/configuration_1_3.dtd">
 
 <module name="Checker">
-    <!-- Основные настройки -->
     <property name="severity" value="error"/>
 
-    <!-- Пакет для обхода дерева кода -->
+    <!-- Проверки на уровне TreeWalker -->
     <module name="TreeWalker">
-        <!-- Проверка отступов -->
         <module name="Indentation">
             <property name="basicOffset" value="4"/>
             <property name="braceAdjustment" value="0"/>
@@ -18,20 +16,11 @@
             <property name="lineWrappingIndentation" value="8"/>
         </module>
 
-        <!-- Пробелы после ключевых слов/запятых -->
         <module name="WhitespaceAfter">
             <property name="tokens" value="COMMA, SEMI"/>
         </module>
 
-        <!-- Пробелы перед ключевыми словами -->
-        <module name="WhitespaceBefore">
-            <property name="tokens"
-                      value="LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, LITERAL_SWITCH, LITERAL_RETURN"/>
-        </module>
-
-        <!-- Скобки и пробелы -->
-        <module name="ParenPad"/>
-        <module name="EmptyLineSeparator"/>
+        <module name="WhitespaceAround"/>
         <module name="NeedBraces"/>
         <module name="LeftCurly">
             <property name="option" value="eol"/>
@@ -39,25 +28,27 @@
         <module name="RightCurly">
             <property name="option" value="alone"/>
         </module>
+        <module name="EmptyLineSeparator"/>
 
-        <!-- Класс и методы -->
+        <module name="JavadocMethod">
+            <property name="accessModifiers" value="public"/>
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
+
         <module name="JavadocType"/>
-        <module name="JavadocMethod"/>
-        <module name="JavadocVariable"/>
 
-        <!-- Именование -->
         <module name="MethodName"/>
         <module name="ParameterName"/>
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
         <module name="TypeName"/>
-
-        <!-- Ограничения длины строк -->
-        <module name="LineLength">
-            <property name="max" value="120"/>
-        </module>
     </module>
 
-    <!-- Проверка пустых строк в конце файлов -->
+    <!-- Проверки на уровне Checker -->
+    <module name="LineLength">
+        <property name="max" value="120"/>
+    </module>
+
     <module name="NewlineAtEndOfFile"/>
 </module>
