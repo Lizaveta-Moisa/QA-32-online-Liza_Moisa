@@ -62,10 +62,7 @@
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
-                    <version>2.20.1</version>
-                    <configuration>
-                        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
-                    </configuration>
+                    <version>2.12.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
