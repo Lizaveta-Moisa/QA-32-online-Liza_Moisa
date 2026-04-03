@@ -24,7 +24,11 @@ pipeline {
             steps {
                 allure includeProperties: false,
                        jdk: '',
-                      results: [[path: '**/target/allure-results']]
+                      results: [[path: 'web-test/target/allure-results'],
+                      [path: 'api/target/allure-results'],
+                      [path: 'api-test/target/allure-results'],
+                      [path: 'common/target/allure-results'],
+                      [path: 'database/target/allure-results']]
             }
         }
     }
