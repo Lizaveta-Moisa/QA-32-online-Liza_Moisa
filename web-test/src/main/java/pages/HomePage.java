@@ -7,13 +7,19 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage {
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
+    private static final String BASE_URL = "https://automationexercise.com";
 
     private final By loginButton = By.xpath("//a[@href='/login']");
 
     private final By logoutButton = By.xpath("//a[normalize-space()='Logout']");
+
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void openPage() {
+        super.openPage(BASE_URL); // вызываем универсальный метод BasePage
+    }
 
     @Step("Нажимаем кнопку Login")
     public LoginPage clickLogin() {

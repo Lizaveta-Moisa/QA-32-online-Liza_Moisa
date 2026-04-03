@@ -1,5 +1,6 @@
 package tests.logout;
 
+import assertions.AssertionSteps;
 import common.utils.LoggerUtils;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
@@ -8,8 +9,7 @@ import pages.HomePage;
 import steps.LoginSteps;
 import tests.BaseTest;
 
-import static common.config.Config.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static common.config.Constant.*;
 
 public class LogoutTest extends BaseTest {
     @Test
@@ -19,7 +19,7 @@ public class LogoutTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: успешный логин и выход");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.openLoginPage();
@@ -29,11 +29,7 @@ public class LogoutTest extends BaseTest {
         homePage.clickLogout();
         LoggerUtils.log().info("Нажата кнопка Logout");
 
-        boolean isLoginVisible = homePage.isLoginButtonVisible();
-        LoggerUtils.log().info("Проверка наличия кнопки Login после логаута: " + isLoginVisible);
-
-        assertThat(isLoginVisible)
-                .as("После успешного логаута должна отображаться кнопка Login")
-                .isTrue();
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLoginButtonVisible(homePage.isLoginButtonVisible());
     }
 }

@@ -1,10 +1,6 @@
 package common.config;
 
-public final class Config {
-
-    public static final String BASE_URL = "https://automationexercise.com";
-
-    public static final String SIGNUP_URL = BASE_URL + "/signup";
+public final class Constant {
 
     public static final String VALID_EMAIL = "testuserLiza@mail.com";
 

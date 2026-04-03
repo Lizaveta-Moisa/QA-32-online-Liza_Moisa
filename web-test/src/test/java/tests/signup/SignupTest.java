@@ -1,5 +1,6 @@
 package tests.signup;
 
+import assertions.AssertionSteps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
@@ -10,8 +11,8 @@ import steps.SignupSteps;
 import common.utils.LoggerUtils;
 import tests.BaseTest;
 
-import static common.config.Config.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static common.config.Constant.*;
+import static pages.SignupPage.SIGNUP_URL;
 
 public class SignupTest extends BaseTest {
 
@@ -31,7 +32,7 @@ public class SignupTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: переход на страницу регистрации");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.openLoginPage();
@@ -41,10 +42,8 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка, что страница регистрации открылась");
 
-        String currentUrl = driver.getCurrentUrl();
-        assertThat(currentUrl)
-                .as("После перехода должна открыться страница регистрации")
-                .contains(SIGNUP_URL);
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkCurrentUrlContains(driver.getCurrentUrl(), SIGNUP_URL);
     }
 
     @Test
@@ -54,7 +53,7 @@ public class SignupTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: переход на страницу регистрации");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.openLoginPage();
@@ -66,9 +65,8 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка наличия ошибки при ввода существующих данных");
 
-        assertThat(error)
-                .as("При вводе уже существующих данных отображается ошибка")
-                .isEqualTo("Email Address already exist!");
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLoginErrorText(error, "Email Address already exist!");
     }
 
     @Test(dataProvider = "loginData")
@@ -76,7 +74,7 @@ public class SignupTest extends BaseTest {
     @Description("Параметризованный тест логина с разными входными данными")
     public void parametrizedLoginTest(String email, String password) {
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps loginSteps = new LoginSteps(driver);
 
@@ -87,8 +85,7 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка наличия ошибки при пустых данных");
 
-        assertThat(error)
-                .as("При невалидных данных должно отображаться сообщение об ошибке")
-                .isEqualTo("Your email or password is incorrect!");
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 }

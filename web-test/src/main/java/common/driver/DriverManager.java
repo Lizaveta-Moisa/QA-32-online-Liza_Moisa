@@ -6,9 +6,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverManager {
 
-    public static WebDriver driver;
+    private static WebDriver driver;
 
-    public static WebDriver initDriver() {
+    public static WebDriver createChrome() {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
@@ -19,7 +19,7 @@ public class DriverManager {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            initDriver();
+            createChrome();
         }
         return driver;
     }

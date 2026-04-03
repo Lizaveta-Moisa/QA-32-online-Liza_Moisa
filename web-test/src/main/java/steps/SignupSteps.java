@@ -17,7 +17,7 @@ public class SignupSteps {
         this.signupPage = new SignupPage(driver);
     }
 
-    @Step("Выполняем регистрацию пользователя")
+    @Step("Выполняем регистрацию пользователя  (name: {name}, email: {email})")
     public void signup(String name, String email) {
         signupPage.enterName(name);
         signupPage.enterEmail(email);

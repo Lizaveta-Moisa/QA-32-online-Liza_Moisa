@@ -7,9 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class SignupPage extends BasePage {
 
-    public SignupPage(WebDriver driver) {
-        super(driver);
-    }
+    public static final String SIGNUP_URL = "https://automationexercise.com" + "/signup";
 
     private final By nameInput = By.xpath("//input[@data-qa='signup-name']");
 
@@ -18,6 +16,10 @@ public class SignupPage extends BasePage {
     private final By signupButton = By.xpath("//button[@data-qa='signup-button']");
 
     private final By errorMessage = By.xpath("//p[contains(text(),'Email Address already exist')]");
+
+    public SignupPage(WebDriver driver) {
+        super(driver);
+    }
 
     @Step("Вводим имя: {name}")
     public void enterName(String name) {

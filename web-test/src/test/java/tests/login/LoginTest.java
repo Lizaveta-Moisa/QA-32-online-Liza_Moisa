@@ -1,5 +1,6 @@
 package tests.login;
 
+import assertions.AssertionSteps;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.AllureId;
@@ -8,8 +9,7 @@ import common.utils.LoggerUtils;
 import steps.LoginSteps;
 import tests.BaseTest;
 
-import static common.config.Config.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static common.config.Constant.*;
 
 public class LoginTest extends BaseTest {
 
@@ -20,18 +20,15 @@ public class LoginTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: успешный логин");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps steps = new LoginSteps(driver);
         steps.openLoginPage();
         steps.login(VALID_EMAIL, VALID_PASSWORD);
         LoggerUtils.log().info("Успешная авторизация");
 
-        boolean isLogoutVisible = homePage.isLogoutButtonVisible();
-        LoggerUtils.log().info("Проверка видимости кнопки Logout: " + isLogoutVisible);
-        assertThat(isLogoutVisible)
-                .as("После успешного логина должна быть видна кнопка Logout")
-                .isTrue();
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLogoutButtonVisible(homePage.isLogoutButtonVisible());
     }
 
     @Test
@@ -41,7 +38,7 @@ public class LoginTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: логин с невалидными данными");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps steps = new LoginSteps(driver);
         steps.openLoginPage();
@@ -49,11 +46,8 @@ public class LoginTest extends BaseTest {
 
         String error = steps.getErrorText();
 
-        LoggerUtils.log().info("Проверка наличия сообщения об ошибке");
-
-        assertThat(error)
-                .as("При неверных данных должно отображаться сообщение об ошибке")
-                .isEqualTo("Your email or password is incorrect!");
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 
     @Test
@@ -63,7 +57,7 @@ public class LoginTest extends BaseTest {
         LoggerUtils.log().info("Старт теста: логин с невалидными данными");
 
         HomePage homePage = new HomePage(driver);
-        homePage.openPage(BASE_URL);
+        homePage.openPage();
 
         LoginSteps steps = new LoginSteps(driver);
         steps.openLoginPage();
@@ -71,10 +65,7 @@ public class LoginTest extends BaseTest {
 
         String error = steps.getErrorText();
 
-        LoggerUtils.log().info("Проверка наличия сообщения об ошибке");
-
-        assertThat(error)
-                .as("При неверных данных должно отображаться сообщение об ошибке")
-                .isEqualTo("Your email or password is incorrect!");
+        AssertionSteps assertions = new AssertionSteps();
+        assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 }
