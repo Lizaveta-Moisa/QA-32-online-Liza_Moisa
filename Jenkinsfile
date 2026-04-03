@@ -7,6 +7,8 @@ pipeline {
     }
 
 
+
+
     stages {
         stage('Checkout') {
             steps {
@@ -16,7 +18,7 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
 
@@ -24,11 +26,13 @@ pipeline {
             steps {
                 allure includeProperties: false,
                        jdk: '',
-                      results: [[path: 'web-test/target/allure-results'],
+                      results: [
+                      [path: 'web-test/target/allure-results'],
                       [path: 'api/target/allure-results'],
                       [path: 'api-test/target/allure-results'],
                       [path: 'common/target/allure-results'],
-                      [path: 'database/target/allure-results']]
+                      [path: 'database/target/allure-results']
+                      ]
             }
         }
     }
