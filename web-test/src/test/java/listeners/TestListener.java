@@ -15,7 +15,7 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         WebDriver driver = DriverManager.getDriver();
         if (driver != null) {
-            LoggerUtils.log().info("Тест упал: " + result.getName() + ", делаем скриншот");
+            LoggerUtils.log().info("Тест упал: %s, делаем скриншот".formatted(result.getName()));
             ScreenshotUtil.takeScreenshot(driver, result.getName());
         }
     }

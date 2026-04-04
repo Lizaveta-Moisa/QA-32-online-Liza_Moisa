@@ -1,6 +1,6 @@
 package tests.logout;
 
-import assertions.AssertionSteps;
+import assertions.HomePageAssertionsSteps;
 import common.utils.LoggerUtils;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
@@ -29,7 +29,7 @@ public class LogoutTest extends BaseTest {
         homePage.clickLogout();
         LoggerUtils.log().info("Нажата кнопка Logout");
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLoginButtonVisible(homePage.isLoginButtonVisible());
     }
 }

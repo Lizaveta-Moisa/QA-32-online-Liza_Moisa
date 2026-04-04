@@ -1,6 +1,6 @@
 package tests.signup;
 
-import assertions.AssertionSteps;
+import assertions.HomePageAssertionsSteps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
@@ -42,7 +42,7 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка, что страница регистрации открылась");
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkCurrentUrlContains(driver.getCurrentUrl(), SIGNUP_URL);
     }
 
@@ -65,7 +65,7 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка наличия ошибки при ввода существующих данных");
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLoginErrorText(error, "Email Address already exist!");
     }
 
@@ -85,7 +85,7 @@ public class SignupTest extends BaseTest {
 
         LoggerUtils.log().info("Проверка наличия ошибки при пустых данных");
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 }

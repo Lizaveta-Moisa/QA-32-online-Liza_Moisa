@@ -9,25 +9,15 @@ public class DriverManager {
     private static WebDriver driver;
 
     public static WebDriver createChrome() {
-        if (driver == null) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            driver = new ChromeDriver(options);
-        }
-        return driver;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        return new ChromeDriver(options);
     }
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            createChrome();
+            driver = createChrome();
         }
         return driver;
-    }
-
-    public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
     }
 }

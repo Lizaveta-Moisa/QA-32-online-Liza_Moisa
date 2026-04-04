@@ -17,8 +17,9 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @Step("Открываем страницу {url}")
     public void openPage() {
-        super.openPage(BASE_URL); // вызываем универсальный метод BasePage
+        super.openPage(BASE_URL);
     }
 
     @Step("Нажимаем кнопку Login")

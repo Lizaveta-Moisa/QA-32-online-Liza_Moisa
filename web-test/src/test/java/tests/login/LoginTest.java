@@ -1,6 +1,6 @@
 package tests.login;
 
-import assertions.AssertionSteps;
+import assertions.HomePageAssertionsSteps;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.AllureId;
@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
         steps.login(VALID_EMAIL, VALID_PASSWORD);
         LoggerUtils.log().info("Успешная авторизация");
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLogoutButtonVisible(homePage.isLogoutButtonVisible());
     }
 
@@ -46,7 +46,7 @@ public class LoginTest extends BaseTest {
 
         String error = steps.getErrorText();
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 
@@ -65,7 +65,7 @@ public class LoginTest extends BaseTest {
 
         String error = steps.getErrorText();
 
-        AssertionSteps assertions = new AssertionSteps();
+        HomePageAssertionsSteps assertions = new HomePageAssertionsSteps();
         assertions.checkLoginErrorText(error, "Your email or password is incorrect!");
     }
 }
