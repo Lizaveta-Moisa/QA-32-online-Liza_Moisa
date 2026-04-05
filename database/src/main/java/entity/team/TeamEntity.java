@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TeamEntity {
     private Long id;
+
     private String name;
 }

@@ -2,11 +2,15 @@ package service.login;
 
 import constant.Header;
 import entity.Request;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import request.user.UserRq;
 import response.login.AuthTokenRs;
 import service.user.UserService;
 
 import java.util.Map;
+
+import static io.restassured.RestAssured.given;
 
 public class LoginService extends UserService {
     public static final String AUTH_TOKEN = "auth/sign-up";
@@ -23,8 +27,19 @@ public class LoginService extends UserService {
                 .body(userRq)
                 .headers(headers)
                 .clazz(AuthTokenRs.class)
-                //.schemaName(POST_AUTH_TOKEN_SCHEMA_PATH)
+                .schemaName(POST_AUTH_TOKEN_SCHEMA_PATH)
                 .build()
         );
+    }
+
+    public Response loginRaw(UserRq userRq) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(userRq)
+                .when()
+                .post("/auth/sign-up")
+                .then()
+                .extract()
+                .response();
     }
 }

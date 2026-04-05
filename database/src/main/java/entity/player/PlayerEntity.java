@@ -12,11 +12,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlayerEntity {
     private Long id;
+
     private TeamEntity teamId;
+
     private String firstName;
+
     private String lastName;
+
     private String position;
+
     private int age;
+
     private int height;
+
     private int weight;
 }

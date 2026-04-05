@@ -17,5 +17,6 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRq {
     private String username;
+
     private String password;
 }

@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Support {
     private String url;
+
     private String text;
 }

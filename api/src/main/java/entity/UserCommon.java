@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserCommon {
     private String username;
+
     private String token;
 }

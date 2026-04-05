@@ -3,7 +3,9 @@ package assertion;
 import entity.user.UserEntity;
 import io.qameta.allure.Step;
 
-public class UserDatabaseAssertionSteps extends AssertionSteps{
+import static assertion.SoftAssertionsStorage.softAssert;
+
+public class UserDatabaseAssertionSteps extends AssertionSteps {
     private final UserEntity userEntity;
 
     public UserDatabaseAssertionSteps(UserEntity userEntity) {

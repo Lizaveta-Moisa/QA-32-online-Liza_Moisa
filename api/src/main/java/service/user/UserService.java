@@ -12,7 +12,9 @@ import java.util.Map;
 
 public class UserService extends ApiService {
     public static final String USERS = "/users";
+
     public static final String USERS_PATTERN = "/users/%s";
+
     public static final String GET_USERS_SCHEMA_PATH = "schemas/user/get_users_schema.json";
 
     /**
@@ -30,7 +32,7 @@ public class UserService extends ApiService {
                 .url(BASE_URL)
                 .path(USERS)
                 .headers(headers)
-                //.schemaName(GET_USERS_SCHEMA_PATH)
+                .schemaName(GET_USERS_SCHEMA_PATH)
                 .build()
         );
     }
@@ -53,6 +55,28 @@ public class UserService extends ApiService {
                 .path(USERS_PATTERN.formatted(usersRs.getId()))
                 .body(usersRs)
                 .headers(headers)
+                .build()
+        );
+    }
+
+    /**
+     * Получаем пользователя по ID
+     *
+     * @param userCommon Объект с данными пользователя, включая токен для авторизации
+     * @param userId     ID пользователя, которого нужно получить
+     * @return ValidatableResponse с данными пользователя
+     */
+    public ValidatableResponse getUserById(UserCommon userCommon, long userId) {
+        Map<String, String> headers = Map.of(
+                Header.AUTHORIZATION, TokenUtils.createBearer(userCommon.getToken()),
+                Header.CONTENT_TYPE, "application/json"
+        );
+
+        return get(Request.builder()
+                .url(BASE_URL)
+                .path(USERS_PATTERN.formatted(userId))
+                .headers(headers)
+                .schemaName(GET_USERS_SCHEMA_PATH) // Можно добавить схему, если нужно
                 .build()
         );
     }

@@ -9,7 +9,9 @@ public class DbConnection {
     private static volatile DbConnection instance;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/basketball";
+
     private static final String USER = "vibe";
+
     private static final String PASSWORD = "vibe";
 
     private DbConnection() {

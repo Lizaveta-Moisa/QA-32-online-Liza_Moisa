@@ -1,8 +1,9 @@
 package assertion;
 
+import org.assertj.core.api.SoftAssertions;
+
 import java.util.Objects;
 
-import org.assertj.core.api.SoftAssertions;
 
 public class SoftAssertionsStorage {
     private static final ThreadLocal<SoftAssertions> SOFT_ASSERTIONS_THREAD_LOCAL = new ThreadLocal<>();

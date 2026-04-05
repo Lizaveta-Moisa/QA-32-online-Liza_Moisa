@@ -17,9 +17,12 @@ import request.Rq;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Rq {
     private Integer id;
+
     private String email;
+
     @JsonProperty("first_name")
     private String firstName;
+
     @JsonProperty("last_name")
     private String lastName;
 }

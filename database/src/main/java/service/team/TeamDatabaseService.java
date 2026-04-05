@@ -16,7 +16,7 @@ public class TeamDatabaseService {
         String sql = "SELECT id, name FROM teams WHERE id = ?";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setLong(1, id);
 
@@ -26,7 +26,8 @@ public class TeamDatabaseService {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch team by id: " + id, e);
         }
 
@@ -37,7 +38,7 @@ public class TeamDatabaseService {
         String sql = "SELECT id, name FROM teams WHERE name = ?";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, name);
 
@@ -47,7 +48,8 @@ public class TeamDatabaseService {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch team by name: " + name, e);
         }
 
@@ -59,14 +61,15 @@ public class TeamDatabaseService {
         List<TeamEntity> teams = new ArrayList<>();
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet rs = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
                 teams.add(mapTeam(rs));
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch teams", e);
         }
 
@@ -77,7 +80,7 @@ public class TeamDatabaseService {
         String sql = "INSERT INTO teams (name) VALUES (?) RETURNING id, name";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, team.getName());
 
@@ -87,7 +90,8 @@ public class TeamDatabaseService {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to save team: " + team.getName(), e);
         }
 
@@ -98,7 +102,7 @@ public class TeamDatabaseService {
         String sql = "UPDATE teams SET name = ? WHERE id = ? RETURNING id, name";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, team.getName());
             statement.setLong(2, team.getId());
@@ -109,7 +113,8 @@ public class TeamDatabaseService {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to update team with id: " + team.getId(), e);
         }
 
@@ -120,13 +125,13 @@ public class TeamDatabaseService {
         String sql = "DELETE FROM teams WHERE id = ?";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setLong(1, id);
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
-
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to delete team with id: " + id, e);
         }
     }

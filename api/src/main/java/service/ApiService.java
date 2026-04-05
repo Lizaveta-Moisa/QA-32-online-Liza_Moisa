@@ -17,13 +17,16 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.Method;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import org.apache.commons.lang3.StringUtils;
 
 
 import static io.restassured.RestAssured.given;
 
 public class ApiService {
-    protected final HttpClientConfig httpClientConfig = CurlRestAssuredConfigFactory.createConfig().getHttpClientConfig();
+    protected final HttpClientConfig httpClientConfig = CurlRestAssuredConfigFactory
+            .createConfig()
+            .getHttpClientConfig();
 
     protected final static String BASE_URL = "http://localhost:5030";
 
@@ -121,7 +124,8 @@ public class ApiService {
     protected ValidatableResponse getValidatableResponse(Method method,
                                                          Request request) {
         RequestSpecification requestSpecification =
-                getRequestSpecification(request.getUrl(), request.getConfig(), request.getParams(), request.getHeaders(),
+                getRequestSpecification(request.getUrl(), request.getConfig(),
+                        request.getParams(), request.getHeaders(),
                         request.getBody(), request.getUrlEncodingEnabled());
         ValidatableResponse validatableResponse = switch (method) {
             case Method.GET -> requestSpecification.get(getPath(request.getPath())).then();

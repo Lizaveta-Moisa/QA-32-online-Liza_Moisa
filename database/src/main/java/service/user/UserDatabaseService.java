@@ -23,14 +23,15 @@ public class UserDatabaseService {
                 WHERE id = ?
                 """;
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     return Optional.of(mapUser(rs));
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch user by id: " + id, e);
         }
         return Optional.empty();
@@ -43,14 +44,15 @@ public class UserDatabaseService {
                 WHERE username = ?
                 """;
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     return Optional.of(mapUser(rs));
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch user by username: " + username, e);
         }
         return Optional.empty();
@@ -63,12 +65,13 @@ public class UserDatabaseService {
                 """;
         List<UserEntity> users = new ArrayList<>();
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet rs = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 users.add(mapUser(rs));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to fetch users", e);
         }
         return users;
@@ -81,7 +84,7 @@ public class UserDatabaseService {
                 RETURNING id, username, password, first_name, last_name, role
                 """;
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
@@ -93,7 +96,8 @@ public class UserDatabaseService {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to save user: " + user.getUsername(), e);
         }
         throw new RuntimeException("User was not saved: " + user.getUsername());
@@ -111,7 +115,7 @@ public class UserDatabaseService {
                 RETURNING id, username, password, first_name, last_name, role
                 """;
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
@@ -123,7 +127,8 @@ public class UserDatabaseService {
                     return mapUser(rs);
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to update user with id: " + user.getId(), e);
         }
 
@@ -136,11 +141,12 @@ public class UserDatabaseService {
                 WHERE id = ?
                 """;
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException("Failed to delete user with id: " + id, e);
         }
     }

@@ -15,14 +15,24 @@ import java.util.Map;
 @NoArgsConstructor
 public class Request {
     private String url;
+
     private EncoderConfig config;
+
     private String path;
+
     private Map<String, String> params;
+
     private Map<String, String> headers;
+
     private Object body;
+
     private String schemaName;
+
     private Class<?> clazz;
+
     private String jsonPath;
+
     private Method method;
+
     private Boolean urlEncodingEnabled;
 }

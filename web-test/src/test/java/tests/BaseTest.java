@@ -24,9 +24,6 @@ public class BaseTest {
     @Step("Закрытие браузера после теста")
     public void tearDown() {
         LoggerUtils.log().info("=== END TEST ===");
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
+        DriverManager.quitDriver();
     }
 }

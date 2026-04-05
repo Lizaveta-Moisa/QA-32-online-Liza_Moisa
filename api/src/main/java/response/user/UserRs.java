@@ -17,7 +17,10 @@ import response.Rs;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRs implements Rs {
     private Long id;
+
     private String username;
+
     private String password;
+
     private Role role;
 }
