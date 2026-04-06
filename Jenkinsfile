@@ -6,8 +6,13 @@ pipeline {
         jdk 'jdk21'
     }
 
-
-
+    parameters {
+        choice(
+            name: 'TEST_TYPE',
+            choices: ['api', 'web'],
+            description: 'Какие тесты запускать'
+        )
+    }
 
     stages {
         stage('Checkout') {
@@ -18,21 +23,31 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                bat 'mvn clean test'
+                script {
+                    if (params.TEST_TYPE == 'api') {
+                        bat 'mvn clean test -pl api-test -am'
+                    } else {
+                        bat 'mvn clean test -pl web-test -am'
+                    }
+                }
             }
         }
 
         stage('Allure report') {
             steps {
-                allure includeProperties: false,
-                       jdk: '',
-                      results: [
-                      [path: 'web-test/target/allure-results'],
-                      [path: 'api/target/allure-results'],
-                      [path: 'api-test/target/allure-results'],
-                      [path: 'common/target/allure-results'],
-                      [path: 'database/target/allure-results']
-                      ]
+                script {
+                    def results = []
+
+                    if (params.TEST_TYPE == 'api') {
+                        results += [[path: 'api-test/target/allure-results']]
+                    } else {
+                        results += [[path: 'web-test/target/allure-results']]
+                    }
+
+                    allure includeProperties: false,
+                           jdk: '',
+                           results: results
+                }
             }
         }
     }
