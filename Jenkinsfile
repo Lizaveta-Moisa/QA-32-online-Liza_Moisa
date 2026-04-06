@@ -9,7 +9,7 @@ pipeline {
     parameters {
         choice(
             name: 'TEST_TYPE',
-            choices: ['api', 'web'],
+            choices: ['api', 'web', 'all'],
             description: 'Какие тесты запускать'
         )
     }
@@ -26,7 +26,12 @@ pipeline {
                 script {
                     if (params.TEST_TYPE == 'api') {
                         bat 'mvn clean test -pl api-test -am'
-                    } else {
+                    } else if (params.TEST_TYPE == 'web') {
+                        bat 'mvn clean test -pl web-test -am'
+                    } else { // all
+                        echo 'Running API tests'
+                        bat 'mvn clean test -pl api-test -am'
+                        echo 'Running Web tests'
                         bat 'mvn clean test -pl web-test -am'
                     }
                 }
@@ -40,7 +45,10 @@ pipeline {
 
                     if (params.TEST_TYPE == 'api') {
                         results += [[path: 'api-test/target/allure-results']]
-                    } else {
+                    } else if (params.TEST_TYPE == 'web') {
+                        results += [[path: 'web-test/target/allure-results']]
+                    } else { // all
+                        results += [[path: 'api-test/target/allure-results']]
                         results += [[path: 'web-test/target/allure-results']]
                     }
 
